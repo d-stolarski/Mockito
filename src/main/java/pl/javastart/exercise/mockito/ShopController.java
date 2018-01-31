@@ -9,18 +9,28 @@ public class ShopController {
 
     }
 
-    public void sellItem(Human human, String itemName) {
+    public void sellItem(Human human, Item item) {
 
-        if (shop.hasItem(itemName)) {
-            Item item = shop.findItemByName(itemName);
+        if (shop.hasItem(item)) {
+            item = shop.findItemByName(item.getName());
             if (item.getAgeRestriction() > human.getAge()) {
                 throw new TooYoungException();
             }
+            if (human.getJob().equals("policeman") && !(item.isLegal())){
+                throw new TooYoungException();
+            }
+            if (human.getMoney() < item.getPrice()){
+                throw new OutOfMoneyException();
+            } else {
+                human.setMoney(human.getMoney() - item.getPrice());
+                shop.setMoney(shop.getMoney() + item.getPrice());
+            }
 
         } else {
-            // TODO sklep nie ma danego przedmiotu, wyrzuć wyjątek OutOfStockException
+            throw new OutOfStockException();
         }
 
     }
+
 
 }

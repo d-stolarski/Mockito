@@ -17,13 +17,17 @@ public class Shop {
         sprawdzamy tylko czy została uruchomiona */
     }
 
-    public boolean hasItem(String itemName) {
-        // TODO dodaj kod sprawdzający czy sklep na w asortymencie przedmot o danej nazwie
-        return false;
+    public boolean hasItem(Item item) {
+        boolean score = stock.containsKey(item.getName());
+        return score;
     }
 
     public Item findItemByName(String itemName) {
-        // TODO dodaj kod wyszukujący przedmiot po jego nazwie
+        for (Item key : stock.keySet()) {
+            if (key.getName().equals(itemName)) {
+                return key;
+            }
+        }
         return null;
     }
 
@@ -34,6 +38,7 @@ public class Shop {
     public Map<Item, Integer> getStock() {
         return stock;
     }
-
-
+    public void setMoney(int money) {
+        this.money = money;
+    }
 }

@@ -7,6 +7,15 @@ public class Human {
     private String job;
     private int money;
 
+    public Human() {}
+
+    public Human(String name, int age, String job, int money) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.money = money;
+    }
+
     public String getName() {
         return name;
     }
