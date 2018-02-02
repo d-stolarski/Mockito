@@ -18,7 +18,7 @@ public class Shop {
     }
 
     public boolean hasItem(Item item) {
-        boolean score = stock.containsKey(item.getName());
+        boolean score = stock.containsKey(item);
         return score;
     }
 
@@ -29,6 +29,10 @@ public class Shop {
             }
         }
         return null;
+    }
+
+    public void decreaseItemNumber(Map<Item, Integer> stock){
+
     }
 
     public int getMoney() {
