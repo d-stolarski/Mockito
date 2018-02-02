@@ -4,17 +4,13 @@ import java.util.Map;
 
 public class Shop {
 
+    private SoundPlayer soundPlayer;
     private int money;
     private Map<Item, Integer> stock;
 
     public Shop(int money, Map<Item, Integer> stock) {
         this.money = money;
         this.stock = stock;
-    }
-
-    void playCashSound() {
-        /* zakładamy, że ta metoda odtwarza dźwięk https://www.youtube.com/watch?v=Wj_OmtqVLxY, nie musimy jej implementować,
-        sprawdzamy tylko czy została uruchomiona */
     }
 
     public boolean hasItem(Item item) {

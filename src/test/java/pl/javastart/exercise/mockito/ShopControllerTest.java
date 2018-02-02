@@ -3,13 +3,11 @@ package pl.javastart.exercise.mockito;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
@@ -18,6 +16,8 @@ public class ShopControllerTest {
 
     @Mock
     ShopRepository shopRepository;
+    @Mock
+    SoundPlayer soundPlayer;
 
     private ShopController shopController;
     private Shop shop;
@@ -80,7 +80,7 @@ public class ShopControllerTest {
     }
 
     @Test
-    public void shouldMinusMoneyAfterHumanBuyItem() {
+    public void shouldDecreaseMoneyAfterHumanBuyItem() {
         //given
         Human miner = new Human("Pawel", 20, "Miner", 5000);
         Item beer = shop.findItemByName("Piwo");
@@ -129,13 +129,13 @@ public class ShopControllerTest {
     }
 
     @Test
-    public void shouldReturnNullForItemWithZeroNumber(){
+    public void shouldReturnNullForItemWithZeroNumber() {
         //given
         Human actor = new Human("John", 45, "Actor", 20000);
         Item sugar = shop.findItemByName("Cukier");
 
         //when
-        for(int i = 0; i <= 2; i++){
+        for (int i = 0; i <= 2; i++) {
             shopController.sellItem(actor, sugar);
         }
 
@@ -145,16 +145,12 @@ public class ShopControllerTest {
 
     @Test
     public void shouldCallCashShoundMethodOneTime() {
-        //given
-        Human actor = new Human("John", 45, "Actor", 20000);
-        Item sugar = shop.findItemByName("Cukier");
-        Shop shopMock = mock(Shop.class);
 
         //when
-        shopController.sellItem(actor, sugar);
+        soundPlayer.playCashSound();
 
         //then
-        verify(shopMock, times(1)).playCashSound();
+        verify(soundPlayer, times(1)).playCashSound();
     }
 
 }

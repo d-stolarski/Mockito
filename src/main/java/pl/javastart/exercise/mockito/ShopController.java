@@ -6,8 +6,6 @@ public class ShopController {
 
     private Shop shop;
 
-
-
     public ShopController(ShopRepository shopRepository) {
         shop = shopRepository.findShop();
     }
@@ -21,20 +19,20 @@ public class ShopController {
             if (item.getAgeRestriction() > human.getAge()) {
                 throw new TooYoungException();
             }
-            if (human.getJob().toLowerCase().equals("policeman") && !(item.isLegal())){
+            if (human.getJob().toLowerCase().equals("policeman") && !(item.isLegal())) {
                 throw new OutOfStockException();
             }
-            if ((human.getMoney() < item.getPrice()) || (human.getMoney() == 0)){
+            if ((human.getMoney() < item.getPrice()) || (human.getMoney() == 0)) {
                 throw new OutOfMoneyException();
             } else {
                 human.setMoney(human.getMoney() - item.getPrice());
                 shop.setMoney(shop.getMoney() + item.getPrice());
                 int itemNumber = stock.get(item);
                 stock.replace(item, itemNumber, itemNumber - 1);
-                if(itemNumber <= 1){
+                if (itemNumber <= 1) {
                     stock.remove(item);
                 }
-                shop.playCashSound();
+
             }
         } else {
             throw new OutOfStockException();
